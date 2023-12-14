@@ -79,7 +79,7 @@ void add_to_queue(stack_t **new, __attribute__((unused))unsigned int line_nb)
 	}
 
 	tmp = head;
-	while(tmp->next != NULL)
+	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp-> next = *new;
 	(*new)->prev = tmp;

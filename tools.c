@@ -82,6 +82,8 @@ void find(char *opcode, char *val, int line_nb, int format)
 		{"pall", pall_fct},
 		{"pint", pint_fct},
 		{"pop", pop_top_fct},
+		{"swap", swap_fct},
+		{NULL, NULL}
 	};
 
 	if (opcode[0] == '#')
