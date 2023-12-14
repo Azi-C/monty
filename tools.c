@@ -2,7 +2,8 @@
 
 /**
  * open_f - opens a file
- * @file_name: the file name
+ * @file_name: the file namepath
+ * Return: void
  */
 
 void open_f(char *file_name)
@@ -16,131 +17,141 @@ void open_f(char *file_name)
 	fclose(fd);
 }
 
+
 /**
- * read_f - read a file
- * @fd: pointer to the file
+ * read_file - reads a file
+ * @fd: pointer to file descriptor
  */
 
 void read_f(FILE *fd)
 {
-	int line_nb;
-	int format = 0;
+	int line_number, format = 0;
 	char *buffer = NULL;
-	size_t l = 0;
+	size_t len = 0;
 
-	for (line_nb = 1; getline(&buffer, &l, fd) != -1; line_nb++)
-		format = parse_line(buffer, line_nb, format);
+	for (line_number = 1; getline(&buffer, &len, fd) != -1; line_number++)
+	{
+		format = parse_line(buffer, line_number, format);
+	}
 	free(buffer);
 }
 
+
 /**
- * parse_line - seperates lines into tokens
+ * parse_line - Separates  lines into tokens
  * @buffer: line from the file
- * @line_nb: line number
- * @format: storage format
- * Return: 0 if the opcode is stack, 1 if it is queue
+ * @line_number: line number
+ * @format:  storage format. If 0 Nodes will be entered as a stack.
+ * if 1 nodes will be entered as a queue.
+ * Return: Returns 0 if the opcode is stack. 1 if queue.
  */
 
-int parse_line(char *buffer, int line_nb, int format)
+int parse_line(char *buffer, int line_number, int format)
 {
-	char *op;
-	char *value;
-	const char *d = "\n";
+	char *opcode, *value;
+	const char *delim = "\n ";
 
-	if (!buffer)
+	if (buffer == NULL)
 		err(4);
-	op = strtok(buffer, d);
 
-	if (!op)
+	opcode = strtok(buffer, delim);
+	if (opcode == NULL)
 		return (format);
+	value = strtok(NULL, delim);
 
-	value = strtok(NULL, d);
-	if (strcmp(op, "stack") == 0)
+	if (strcmp(opcode, "stack") == 0)
 		return (0);
-	if (strcmp(op, "queue") == 0)
+	if (strcmp(opcode, "queue") == 0)
 		return (1);
 
-	find(op, value, line_nb, format);
+	find_f(opcode, value, line_number, format);
 	return (format);
 }
 
 /**
- * find - find the function to use
+ * find_f - find the appropriate function for the opcode
  * @opcode: opcode
- * @val: argument of opcode
- * @format: storage format
- * @line_nb: line number
+ * @value: argument of opcode
+ * @format:  storage format. If 0 Nodes will be entered as a stack.
+ * @ln: line number
+ * if 1 nodes will be entered as a queue.
+ * Return: void
  */
-
-void find(char *opcode, char *val, int line_nb, int format)
+void find_f(char *opcode, char *value, int ln, int format)
 {
 	int i;
 	int flag;
 
-	instruction_t fcts[] = {
-		{"push", push_fct},
-		{"pall", pall_fct},
-		{"pint", pint_fct},
-		{"pop", pop_top_fct},
-		{"swap", swap_fct},
-		{"nop", nop_fct},
+	instruction_t func_l[] = {
+		{"push", add_to_stack},
+		{"pall", print_stack},
+		{"pint", print_top},
+		{"pop", pop_top},
+		{"nop", nop},
+		{"swap", swap_nodes},
+		{"add", add_nodes},
+		{"sub", sub_nodes},
+		{"div", div_nodes},
+		{"mul", mul_nodes},
+		{"mod", mod_nodes},
+		{"pchar", print_char},
+		{"pstr", print_str},
+		{"rotl", rotl},
+		{"rotr", rotr},
 		{NULL, NULL}
 	};
 
 	if (opcode[0] == '#')
 		return;
 
-	for (flag = 1, i = 0; fcts[i].opcode != NULL; i++)
+	for (flag = 1, i = 0; func_l[i].opcode != NULL; i++)
 	{
-		if (strcmp(opcode, fcts[i].opcode) == 0)
+		if (strcmp(opcode, func_l[i].opcode) == 0)
 		{
-			call(fcts[i].f, opcode, val, line_nb, format);
+			call_fct(func_l[i].f, opcode, value, ln, format);
 			flag = 0;
 		}
 	}
-
 	if (flag == 1)
-		err(3, line_nb, opcode);
+		err(3, ln, opcode);
 }
 
-/**
- * call - calls the right function
- * @fct: pointer to the fct
- * @opcode: opcode
- * @val: numeric value
- * @line_nb: line number
- * @format: storage format
- */
 
-void call(op_fct fct, char *opcode, char *val, int line_nb, int format)
+/**
+ * call_f - Calls the required function.
+ * @func: Pointer to the function that is about to be called.
+ * @op: string representing the opcode.
+ * @val: string representing a numeric value.
+ * @ln: line numeber for the instruction.
+ * @format: Format specifier.
+ */
+void call_f(op_func fct, char *op, char *val, int ln, int format)
 {
 	stack_t *node;
 	int flag;
 	int i;
 
 	flag = 1;
-	if (strcmp(opcode, "push") == 0)
+	if (strcmp(op, "push") == 0)
 	{
 		if (val != NULL && val[0] == '-')
 		{
-			val++;
+			val = val + 1;
 			flag = -1;
 		}
 		if (val == NULL)
-			err(5, line_nb);
-
+			err(5, ln);
 		for (i = 0; val[i] != '\0'; i++)
 		{
 			if (isdigit(val[i]) == 0)
-				err(5, line_nb);
+				err(5, ln);
 		}
-
 		node = create_node(atoi(val) * flag);
 		if (format == 0)
-			fct(&node, line_nb);
+			fct(&node, ln);
 		if (format == 1)
-			add_to_queue(&node, line_nb);
+			add_to_queue(&node, ln);
 	}
 	else
-		fct(&head, line_nb);
+		fct(&head, ln);
 }
