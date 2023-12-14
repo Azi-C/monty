@@ -59,3 +59,24 @@ void pint_fct(stack_t **h, unsigned int line_nb)
 		err2(6, line_nb);
 	printf("%d\n", (*h)->n);
 }
+
+/**
+ * pop_top_fct - Delete the node in the top
+ * @h: pointer to a pointer to top node of the stack
+ * @line_nb: line number
+ */
+
+void pop_top_fct(stack_t **h, unsigned int line_nb)
+{
+	stack_t *tmp;
+
+	if (!h || !(*h))
+		err2(7, line_nb);
+
+	tmp = *h;
+	*h = tmp->next;
+	if (*h != NULL)
+		(*h)->prev = NULL;
+
+	free(tmp);
+}
