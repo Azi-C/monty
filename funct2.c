@@ -1,28 +1,28 @@
 #include "monty.h"
 
 /**
- * nop - Does nothing.
- * @stack: Pointer to a pointer pointing to top node of the stack.
- * @line_number: Interger representing the line number of of the opcode.
+ * nop_fct - Does nothing.
+ * @stack: top node of the stack.
+ * @line_nb: line number of of the opcode.
  */
-void nop(stack_t **stack, unsigned int line_number)
+void nop_fct(stack_t **stack, unsigned int line_nb)
 {
 	(void)stack;
-	(void)line_number;
+	(void)line_nb;
 }
 
 
 /**
- * swap_nodes - Swaps the top two elements of the stack.
- * @stack: Pointer to a pointer pointing to top node of the stack.
- * @line_number: Interger representing the line number of of the opcode.
+ * swap_fct - Swaps the top two elements of the stack.
+ * @stack:top node of the stack.
+ * @line_nb: line number of of the opcode.
  */
-void swap_nodes(stack_t **stack, unsigned int line_number)
+void swap_fct(stack_t **stack, unsigned int line_nb)
 {
 	stack_t *tmp;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
-		more_err(8, line_number, "swap");
+		err2(8, line_nb, "swap");
 	tmp = (*stack)->next;
 	(*stack)->next = tmp->next;
 	if (tmp->next != NULL)
@@ -43,7 +43,7 @@ void add_nodes(stack_t **stack, unsigned int line_number)
 	int sum;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
-		more_err(8, line_number, "add");
+		err2(8, line_number, "add");
 
 	(*stack) = (*stack)->next;
 	sum = (*stack)->n + (*stack)->prev->n;
@@ -64,7 +64,7 @@ void sub_nodes(stack_t **stack, unsigned int line_number)
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
 
-		more_err(8, line_number, "sub");
+		err2(8, line_number, "sub");
 
 
 	(*stack) = (*stack)->next;
@@ -85,10 +85,10 @@ void div_nodes(stack_t **stack, unsigned int line_number)
 	int sum;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
-		more_err(8, line_number, "div");
+		err2(8, line_number, "div");
 
 	if ((*stack)->n == 0)
-		more_err(9, line_number);
+		err2(9, line_number);
 	(*stack) = (*stack)->next;
 	sum = (*stack)->n / (*stack)->prev->n;
 	(*stack)->n = sum;

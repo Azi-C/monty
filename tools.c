@@ -69,26 +69,24 @@ int parse_line(char *buffer, int line_number, int format)
 }
 
 /**
- * find_f - find the appropriate function for the opcode
+ * find_f - find the function to use
  * @opcode: opcode
  * @value: argument of opcode
  * @format:  storage format. If 0 Nodes will be entered as a stack.
- * @ln: line number
- * if 1 nodes will be entered as a queue.
- * Return: void
+ * @line_nb: line number
  */
-void find_f(char *opcode, char *value, int ln, int format)
+void find_f(char *opcode, char *value, int line_nb, int format)
 {
 	int i;
 	int flag;
 
 	instruction_t func_l[] = {
-		{"push", add_to_stack},
-		{"pall", print_stack},
-		{"pint", print_top},
+		{"push", push_fct},
+		{"pall", pall_fct},
+		{"pint", pint_fct},
 		{"pop", pop_top},
-		{"nop", nop},
-		{"swap", swap_nodes},
+		{"nop", nop_fct},
+		{"swap", swap_fct},
 		{"add", add_nodes},
 		{"sub", sub_nodes},
 		{"div", div_nodes},
@@ -108,24 +106,24 @@ void find_f(char *opcode, char *value, int ln, int format)
 	{
 		if (strcmp(opcode, func_l[i].opcode) == 0)
 		{
-			call_f(func_l[i].f, opcode, value, ln, format);
+			call_f(func_l[i].f, opcode, value, line_nb, format);
 			flag = 0;
 		}
 	}
 	if (flag == 1)
-		err(3, ln, opcode);
+		err(3, line_nb, opcode);
 }
 
 
 /**
- * call_f - Calls the required function.
- * @func: Pointer to the function that is about to be called.
- * @op: string representing the opcode.
- * @val: string representing a numeric value.
- * @ln: line numeber for the instruction.
+ * call_f - Calls the fuction to use
+ * @func: Pointer to the function 
+ * @op: string representing the opcode
+ * @val: string reprenting numeric value
+ * @line_nb: line numeber for the instruction.
  * @format: Format specifier.
  */
-void call_f(op_func fct, char *op, char *val, int ln, int format)
+void call_f(op_func fct, char *op, char *val, int line_nb, int format)
 {
 	stack_t *node;
 	int flag;
@@ -140,18 +138,18 @@ void call_f(op_func fct, char *op, char *val, int ln, int format)
 			flag = -1;
 		}
 		if (val == NULL)
-			err(5, ln);
+			err(5, line_nb);
 		for (i = 0; val[i] != '\0'; i++)
 		{
 			if (isdigit(val[i]) == 0)
-				err(5, ln);
+				err(5, line_nb);
 		}
 		node = create_node(atoi(val) * flag);
 		if (format == 0)
-			fct(&node, ln);
+			fct(&node, line_nb);
 		if (format == 1)
-			add_to_queue(&node, ln);
+			add_to_queue(&node, line_nb);
 	}
 	else
-		fct(&head, ln);
+		fct(&head, line_nb);
 }
