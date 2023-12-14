@@ -108,7 +108,7 @@ void find_f(char *opcode, char *value, int ln, int format)
 	{
 		if (strcmp(opcode, func_l[i].opcode) == 0)
 		{
-			call_fct(func_l[i].f, opcode, value, ln, format);
+			call_f(func_l[i].f, opcode, value, ln, format);
 			flag = 0;
 		}
 	}
