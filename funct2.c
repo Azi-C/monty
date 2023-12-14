@@ -34,20 +34,40 @@ void swap_fct(stack_t **stack, unsigned int line_nb)
 }
 
 /**
- * add_nodes - Adds the top two elements of the stack.
- * @stack: Pointer to a pointer pointing to top node of the stack.
- * @line_number: Interger representing the line number of of the opcode.
+ * add_fct - Adds the top two elements of the stack.
+ * @stack: top node of the stack.
+ * @line_nb: line number of of the opcode.
  */
-void add_nodes(stack_t **stack, unsigned int line_number)
+void add_fct(stack_t **stack, unsigned int line_nb)
 {
 	int sum;
 
 	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
-		err2(8, line_number, "add");
+		err2(8, line_nb, "add");
 
 	(*stack) = (*stack)->next;
 	sum = (*stack)->n + (*stack)->prev->n;
 	(*stack)->n = sum;
+	free((*stack)->prev);
+	(*stack)->prev = NULL;
+}
+
+/**
+ * sub_fct - subs the two top elements
+ * @stack: top node of the stack
+ * @line_nb: line number
+ */
+
+void sub_fct(stack_t **stack, unsigned int line_nb)
+{
+	int rslt;
+
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
+		err2(8, line_nb, "sub");
+
+	(*stack) = (*stack)->next;
+	rslt = (*stack)->n - (*stack)->prev->n;
+	(*stack)->n = rslt;
 	free((*stack)->prev);
 	(*stack)->prev = NULL;
 }

@@ -87,7 +87,8 @@ void find_f(char *opcode, char *value, int line_nb, int format)
 		{"pop", pop_top},
 		{"nop", nop_fct},
 		{"swap", swap_fct},
-		{"add", add_nodes},
+		{"add", add_fct},
+		{"sub", sub_fct},
 		{NULL, NULL}
 	};
 
