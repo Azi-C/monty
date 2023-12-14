@@ -46,3 +46,51 @@ void pstr_fct(stack_t **stack, __attribute__((unused))unsigned int line_nb)
 	}
 	printf("\n");
 }
+
+/**
+ * rotl_fct - Rotates the first node of the stack to the bottom.
+ * @stack: top node of the stack.
+ * @line_nb: line number of the opcode.
+ */
+void rotl_fct(stack_t **stack, __attribute__((unused))unsigned int line_nb)
+{
+	stack_t *tmp;
+
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
+		return;
+
+	tmp = *stack;
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+
+	tmp->next = *stack;
+	(*stack)->prev = tmp;
+	*stack = (*stack)->next;
+	(*stack)->prev->next = NULL;
+	(*stack)->prev = NULL;
+}
+
+/**
+ * rotr_fct - Rotates the last node of the stack to the top.
+ * @stack: top node of the stack.
+ * @line_nb: line number of the opcode.
+ */
+void rotr_fct(stack_t **stack, __attribute__((unused))unsigned int line_nb)
+{
+	stack_t *tmp;
+
+	if (stack == NULL || *stack == NULL || (*stack)->next == NULL)
+		return;
+
+	tmp = *stack;
+
+	while (tmp->next != NULL)
+		tmp = tmp->next;
+
+	tmp->next = *stack;
+	tmp->prev->next = NULL;
+	tmp->prev = NULL;
+	(*stack)->prev = tmp;
+	(*stack) = tmp;
+}
+
