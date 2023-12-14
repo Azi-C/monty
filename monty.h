@@ -40,6 +40,7 @@ typedef struct instruction_s
 extern stack_t *head;
 
 void push_fct(stack_t **new, unsigned int line_nb);
-void pall_fct(stack_t **head, unsigned int line_nb);
+void pall_fct(stack_t **h, unsigned int line_nb);
+void pint_fct(stack_t **h, unsigned int line_nb);
 
 #endif

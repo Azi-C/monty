@@ -28,21 +28,34 @@ void push_fct(stack_t **new, unsigned int line_nb)
 
 /**
  * pall_fct - Prints a stack
- * @head: stack head
+ * @h: stack head
  * @line_nb: line number not used
  */
 
-void pall_fct(stack_t **head, unsigned int line_nb)
+void pall_fct(stack_t **h, unsigned int line_nb)
 {
 	stack_t *tmp;
 	(void)line_nb;
 
-	if (!head)
+	if (!h)
 		exit(EXIT_FAILURE);
-	tmp = *head;
+	tmp = *h;
 	while (tmp)
 	{
 		printf("%d\n", tmp->n);
 		tmp = tmp->next;
 	}
+}
+
+/**
+ * pint_fct - prints the value at the top of the stack
+ * @h: pointer to a pointer to top node of the stack
+ * @line_nb: line number
+ */
+
+void pint_fct(stack_t **h, unsigned int line_nb)
+{
+	if (!h || !(*h))
+		err2(6, line_nb);
+	printf("%d\n", (*h)->n);
 }
