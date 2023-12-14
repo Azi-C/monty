@@ -85,3 +85,32 @@ void err2(int err_code, ...)
 	free_nodes();
 	exit(EXIT_FAILURE);
 }
+
+/**
+ * string_err - handles errors
+ * @err_code: the error codes are:
+ * (10) => number outside ASCII bounds
+ * (11) => stack empty
+ */
+
+void string_err(int err_code, ...)
+{
+	va_list ag;
+	int line_nb;
+
+	va_start(ag, err_code);
+	line_nb = va_arg(ag, int);
+	switch (err_code)
+	{
+		case 10:
+			fprintf(stderr, "L%d: can't pchar, value out of range\n", line_nb);
+			break;
+		case 11:
+			fprintf(stderr, "L%d: can't pchar, stack empty\n", line_nb);
+			break;
+		default:
+			break;
+	}
+	free_nodes();
+	exit(EXIT_FAILURE);
+}

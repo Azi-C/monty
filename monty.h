@@ -56,5 +56,6 @@ void read_f(FILE *fd);
 void add_to_queue(stack_t **, unsigned int);
 stack_t *create_node(int n);
 int parse_line(char *, int, int);
+void string_err(int err_code, ...);
 
 #endif
