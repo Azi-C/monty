@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * mul_fct - multiplates the top two elements 
+ * mul_fct - multiplates the top two elements
  * @stack: top node of the stack.
  * @line_nb: number of of the opcode.
  */
