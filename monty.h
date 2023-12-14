@@ -63,13 +63,13 @@ void div_fct(stack_t **, unsigned int);
 void mul_fct(stack_t **, unsigned int);
 void mod_fct(stack_t **, unsigned int);
 
-void print_char(stack_t **, unsigned int);
-void print_str(stack_t **, unsigned int);
-void rotl(stack_t **, unsigned int);
+void pchar_fct(stack_t **, unsigned int);
+void pstr_fct(stack_t **, unsigned int);
+void rotl_fct(stack_t **, unsigned int);
 
 void err(int error_code, ...);
 void err2(int error_code, ...);
 void string_err(int error_code, ...);
-void rotr(stack_t **, unsigned int);
+void rotr_fct(stack_t **, unsigned int);
 
 #endif
