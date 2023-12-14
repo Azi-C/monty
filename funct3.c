@@ -1,11 +1,10 @@
-#include "monty"
+#include "monty.h"
 
 /**
- * mul_fct - multiplates the top two elements
- * @stack: top node of the stack
- * @line_nb: line number of of the opcode
+ * mul_fct - multiplates the top two elements 
+ * @stack: top node of the stack.
+ * @line_nb: number of of the opcode.
  */
-
 void mul_fct(stack_t **stack, unsigned int line_nb)
 {
 	int rslt;
