@@ -126,7 +126,7 @@ void call(op_fct fct, char *opcode, char *val, int line_nb, int format)
 			val++;
 			flag = -1;
 		}
-		if (!val)
+		if (val == NULL)
 			err(5, line_nb);
 
 		for (i = 0; val[i] != '\0'; i++)

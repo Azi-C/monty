@@ -11,9 +11,9 @@ void push_fct(stack_t **new, unsigned int line_nb)
 	stack_t *tmp;
 	(void)line_nb;
 
-	if (!new || !(*new))
+	if (new == NULL || (*new) == NULL)
 		exit(EXIT_FAILURE);
-	if (!head)
+	if (head == NULL)
 	{
 		head = *new;
 		return;
@@ -37,10 +37,10 @@ void pall_fct(stack_t **h, unsigned int line_nb)
 	stack_t *tmp;
 	(void)line_nb;
 
-	if (!h)
+	if (h == NULL)
 		exit(EXIT_FAILURE);
 	tmp = *h;
-	while (tmp)
+	while (tmp != NULL)
 	{
 		printf("%d\n", tmp->n);
 		tmp = tmp->next;
