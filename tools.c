@@ -91,6 +91,7 @@ void find_f(char *opcode, char *value, int line_nb, int format)
 		{"sub", sub_fct},
 		{"div", div_fct},
 		{"mul", mul_fct},
+		{"mod", mod_fct},
 		{NULL, NULL}
 	};
 
