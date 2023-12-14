@@ -59,9 +59,9 @@ void nop_fct(stack_t **, unsigned int);
 void swap_fct(stack_t **, unsigned int);
 void add_fct(stack_t **, unsigned int);
 void sub_fct(stack_t **, unsigned int);
-void div_nodes(stack_t **, unsigned int);
-void mul_nodes(stack_t **, unsigned int);
-void mod_nodes(stack_t **, unsigned int);
+void div_fct(stack_t **, unsigned int);
+void mul_fct(stack_t **, unsigned int);
+void mod_fct(stack_t **, unsigned int);
 
 void print_char(stack_t **, unsigned int);
 void print_str(stack_t **, unsigned int);

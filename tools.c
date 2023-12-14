@@ -89,6 +89,7 @@ void find_f(char *opcode, char *value, int line_nb, int format)
 		{"swap", swap_fct},
 		{"add", add_fct},
 		{"sub", sub_fct},
+		{"div", div_fct},
 		{NULL, NULL}
 	};
 
