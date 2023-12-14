@@ -88,14 +88,6 @@ void find_f(char *opcode, char *value, int line_nb, int format)
 		{"nop", nop_fct},
 		{"swap", swap_fct},
 		{"add", add_nodes},
-		{"sub", sub_nodes},
-		{"div", div_nodes},
-		{"mul", mul_nodes},
-		{"mod", mod_nodes},
-		{"pchar", print_char},
-		{"pstr", print_str},
-		{"rotl", rotl},
-		{"rotr", rotr},
 		{NULL, NULL}
 	};
 
