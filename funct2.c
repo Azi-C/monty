@@ -25,6 +25,26 @@ void swap_fct(stack_t **h, unsigned int line_nb)
 }
 
 /**
+ * add_nodes - adds the two elements on the top
+ * @h: header of the stack
+ * @line_nb: line number
+ */
+
+void add_nodes(stack_t **h, unsigned int line_nb)
+{
+	int rslt;
+
+	if (h == NULL || *h == NULL || (*h)->next == NULL)
+		err2(8, line_nb);
+
+	(*h) = (*h)->next;
+	rslt = (*h)->n + (*h)->prev->n;
+	(*h)->n = rslt;
+	free((*h)->prev);
+	(*h)->prev = NULL;
+}
+
+/**
  * nop_fct - does nothing
  * @h: head of the stack
  * @line_nb: line number

@@ -59,5 +59,6 @@ int parse_line(char *, int, int);
 void string_err(int err_code, ...);
 void swap_fct(stack_t **h, unsigned int line_nb);
 void nop_fct(stack_t **stack, unsigned int line_nb);
+void add_nodes(stack_t **h, unsigned int line_nb);
 
 #endif
