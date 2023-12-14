@@ -23,3 +23,14 @@ void swap_fct(stack_t **h, unsigned int line_nb)
 	tmp->prev = NULL;
 	*h = tmp;
 }
+
+/**
+ * nop_fct - does nothing
+ * @h: head of the stack
+ * @line_nb: line number
+ */
+void nop_fct(stack_t **stack, unsigned int line_nb)
+{
+	(void)h;
+	(void)line_nb;
+}

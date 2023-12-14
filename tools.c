@@ -83,6 +83,7 @@ void find(char *opcode, char *val, int line_nb, int format)
 		{"pint", pint_fct},
 		{"pop", pop_top_fct},
 		{"swap", swap_fct},
+		{"nop", nop_fct},
 		{NULL, NULL}
 	};
 
