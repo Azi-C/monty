@@ -87,7 +87,7 @@ void div_fct(stack_t **stack, unsigned int line_nb)
 
 	(*stack) = (*stack)->next;
 	rslt = (*stack)->n / (*stack)->prev->n;
-      	(*stack)->n = rslt;
+	(*stack)->n = rslt;
 	free((*stack)->prev);
 	(*stack)->prev = NULL;
 }
