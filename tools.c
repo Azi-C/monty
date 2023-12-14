@@ -109,7 +109,7 @@ void find_f(char *opcode, char *value, int line_nb, int format)
 
 /**
  * call_f - Calls the fuction to use
- * @fct: Pointer to the function 
+ * @fct: Pointer to the function
  * @op: string representing the opcode
  * @val: string reprenting numeric value
  * @line_nb: line numeber for the instruction.
