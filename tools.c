@@ -19,7 +19,7 @@ void open_f(char *file_name)
 
 
 /**
- * read_file - reads a file
+ * read_f - reads a file
  * @fd: pointer to file descriptor
  */
 
